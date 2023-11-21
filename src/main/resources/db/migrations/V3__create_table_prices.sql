@@ -1,11 +1,12 @@
-CREATE TABLE PRICES (
-    BRAND_ID INT,
-    START_DATE TIMESTAMP,
-    END_DATE TIMESTAMP,
-    PRICE_LIST INT,
-    PRODUCT_ID INT,
-    PRIORITY INT,
-    PRICE DECIMAL(10, 2),
-    CURR CHAR(3),
-    PRIMARY KEY (BRAND_ID, START_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY)
+CREATE TABLE prices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    brand_id INT,
+    start_date TIMESTAMP,
+    end_date TIMESTAMP,
+    price_list VARCHAR(255),
+    product_id INT,
+    priority INT,
+    price DECIMAL,
+    curr VARCHAR(3),
+    CONSTRAINT fk_brand FOREIGN KEY (brand_id) REFERENCES brands(id)
 );
