@@ -22,9 +22,8 @@ public class PricesServiceImpl implements PricesService{
 
 
     @Override
-    public PricesResponse getPrices(String date, Long productId, Long brandId) {
-        Timestamp timestampDate = Timestamp.valueOf(LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(timestampDate, productId,brandId);
+    public PricesResponse getPrices(LocalDateTime date, Long productId, Long brandId) {
+        List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId,brandId);
 
         Price selectedPrice = applicablePrice(prices);
         if (prices.isEmpty()) {

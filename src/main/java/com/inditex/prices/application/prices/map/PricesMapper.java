@@ -9,7 +9,6 @@ public class PricesMapper {
                 .productId(price.getProductId())
                 .brandId(price.getBrandId())
                 .fee(price.getPriceList())
-               // .finalPrice()
                 .endDate(price.getEndDate().toString())
                 .startDate(price.getStartDate().toString())
                 .finalPrice(price.getPrice())
