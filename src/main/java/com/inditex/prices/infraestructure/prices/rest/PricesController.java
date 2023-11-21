@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api")
 public class PricesController {
 
     @Autowired
@@ -23,7 +24,7 @@ public class PricesController {
 
     @GetMapping("/prices")
     public PricesResponse getPrices(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
+            @RequestParam String date,
             @RequestParam Long productId,
             @RequestParam Long brandId
     ) {

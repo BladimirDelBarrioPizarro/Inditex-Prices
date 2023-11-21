@@ -10,7 +10,7 @@ public class PricesResponse {
     private Long productId;
     private Long brandId;
     private Integer fee;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private String startDate;
+    private String endDate;
     private BigDecimal finalPrice;
 }

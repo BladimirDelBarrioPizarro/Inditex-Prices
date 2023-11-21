@@ -1,11 +1,13 @@
 package com.inditex.prices.domain.prices;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,10 +22,10 @@ public class Price {
     private Long brandId;
 
     @Column(name = "START_DATE")
-    private LocalDateTime startDate;
+    private Timestamp startDate;
 
     @Column(name = "END_DATE")
-    private LocalDateTime endDate;
+    private Timestamp  endDate;
 
     @Column(name = "PRICE_LIST")
     private Integer priceList;

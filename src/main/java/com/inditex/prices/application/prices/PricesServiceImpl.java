@@ -3,13 +3,17 @@ import com.inditex.prices.application.prices.dto.PricesResponse;
 import com.inditex.prices.application.prices.map.PricesMapper;
 import com.inditex.prices.domain.prices.Price;
 import com.inditex.prices.infraestructure.prices.repository.PricesRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 
+@Slf4j
 @Service
 public class PricesServiceImpl implements PricesService{
 
@@ -18,13 +22,18 @@ public class PricesServiceImpl implements PricesService{
 
 
     @Override
-    public PricesResponse getPrices(LocalDateTime date, Long productId, Long brandId) {
-        List<Price> prices = pricesRepository.findByBrandIdAndProductIdAndStartDateLessThanEqualOrderByPriorityDesc(brandId, date, productId);
-        Price selectedPrice = applicablePrice(prices);
-        assert selectedPrice != null;
-        return PricesMapper.mapPricesToPricesResponse(selectedPrice);
+    public PricesResponse getPrices(String date, Long productId, Long brandId) {
+        Timestamp timestampDate = Timestamp.valueOf(LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(timestampDate, productId,brandId);
 
+        Price selectedPrice = applicablePrice(prices);
+        if (prices.isEmpty()) {
+            throw new IllegalArgumentException("No se encontraron precios para la fecha, el producto y la marca proporcionados.");
+        }
+        return PricesMapper.mapPricesToPricesResponse(selectedPrice);
     }
+
+
 
     private Price applicablePrice(List<Price> prices) {
         // Ordena la lista de tarifas por fecha de inicio de forma descendente

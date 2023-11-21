@@ -1,8 +1,10 @@
 package com.inditex.prices.application.prices;
 
 import com.inditex.prices.application.prices.dto.PricesResponse;
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
+
 
 public interface PricesService {
-    PricesResponse getPrices(LocalDateTime date, Long productId, Long brandId);
+    PricesResponse getPrices(String date, Long productId, Long brandId);
 }
