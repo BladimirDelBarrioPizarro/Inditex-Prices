@@ -1,15 +1,14 @@
 package com.inditex.prices.application.prices;
 import com.inditex.prices.application.prices.dto.PricesResponse;
+import com.inditex.prices.application.prices.exceptions.ErrorMessage;
+import com.inditex.prices.application.prices.exceptions.NoPricesFoundException;
 import com.inditex.prices.application.prices.map.PricesMapper;
 import com.inditex.prices.domain.prices.Price;
 import com.inditex.prices.infraestructure.prices.repository.PricesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 
@@ -24,11 +23,10 @@ public class PricesServiceImpl implements PricesService{
     @Override
     public PricesResponse getPrices(LocalDateTime date, Long productId, Long brandId) {
         List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId,brandId);
-
-        Price selectedPrice = applicablePrice(prices);
         if (prices.isEmpty()) {
-            throw new IllegalArgumentException("No se encontraron precios para la fecha, el producto y la marca proporcionados.");
+            throw new NoPricesFoundException(ErrorMessage.NO_PRICES_FOUND.getMessage());
         }
+        Price selectedPrice = applicablePrice(prices);
         return PricesMapper.mapPricesToPricesResponse(selectedPrice);
     }
 
