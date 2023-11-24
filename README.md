@@ -1,4 +1,4 @@
-# README
+# INDITEX PRICES
 
 Este README proporciona instrucciones detalladas sobre cómo ejecutar y probar el programa "Prices", junto con explicaciones adicionales sobre la lógica del código.
 
