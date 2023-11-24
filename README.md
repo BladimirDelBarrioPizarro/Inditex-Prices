@@ -68,11 +68,11 @@ La función initBinder se llama durante la inicialización del controlador y se 
 ### Detalles del Código
 @InitBinder: Esta anotación indica que el método es utilizado para inicializar el WebDataBinder, que es responsable de la vinculación de datos entre los parámetros de solicitud y los objetos del controlador.
 
-WebDataBinder: Es una clase que proporciona métodos para personalizar la vinculación de datos en Spring MVC.
+- WebDataBinder: Es una clase que proporciona métodos para personalizar la vinculación de datos en Spring MVC.
 
-registerCustomEditor: Este método se utiliza para registrar un editor personalizado para un tipo específico (en este caso, LocalDateTime).
+- registerCustomEditor: Este método se utiliza para registrar un editor personalizado para un tipo específico (en este caso, LocalDateTime).
 
-CustomLocalDateTimeEditor: Es una clase que extiende PropertyEditorSupport y se encarga de la conversión de texto (formato de fecha) a objetos LocalDateTime utilizando varios formateadores de fecha.
+- CustomLocalDateTimeEditor: Es una clase que extiende PropertyEditorSupport y se encarga de la conversión de texto (formato de fecha) a objetos LocalDateTime utilizando varios formateadores de fecha.
 
 Se configuro la aplicación para los siguientes patrones pudiendo añadir cualquier patrón.
 Se tomaron las / para las fechas y se omitieron los segundos al hacer las peticiones en horas y minutos.

@@ -33,8 +33,6 @@ public class PricesServiceImpl implements PricesService{
     }
 
 
-
-
     private Price applicablePrice(List<Price> prices) {
         prices.sort(
                 Comparator.comparing(Price::getStartDate).reversed()
