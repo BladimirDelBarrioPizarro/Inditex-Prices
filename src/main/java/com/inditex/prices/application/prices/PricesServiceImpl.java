@@ -20,7 +20,6 @@ public class PricesServiceImpl implements PricesService{
 
     private final PricesRepository pricesRepository;
 
-
     @Override
     public PricesResponse getPrices(LocalDateTime date, Long productId, Long brandId) {
         List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId,brandId);
@@ -28,6 +27,7 @@ public class PricesServiceImpl implements PricesService{
             throw new NoPricesFoundException(ErrorMessage.NO_PRICES_FOUND.getMessage());
         }
         Price selectedPrice = applicablePrice(prices);
+        log.info(" -- The final price to apply is: {}", selectedPrice.getPrice());
         return PricesMapper.mapPricesToPricesResponse(selectedPrice);
     }
 
