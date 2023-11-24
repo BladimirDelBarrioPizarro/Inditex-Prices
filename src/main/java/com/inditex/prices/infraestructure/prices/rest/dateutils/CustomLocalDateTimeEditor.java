@@ -1,4 +1,4 @@
-package com.inditex.prices.infraestructure.prices.rest.datetime;
+package com.inditex.prices.infraestructure.prices.rest.dateutils;
 
 import java.beans.PropertyEditorSupport;
 import java.time.LocalDateTime;
