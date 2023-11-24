@@ -36,7 +36,7 @@ La clase `PricesServiceImpl` es el corazón de la aplicación. Aquí, se impleme
 
 En la aplicación, la obtención de precios se realiza mediante una consulta a la base de datos utilizando Spring Data JPA. La siguiente línea de código representa la consulta:
 ```
-List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId, brandId);
+pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId, brandId);
 ```
 Este método de consulta se basa en convenciones de nomenclatura de Spring Data JPA. La consulta busca registros en la tabla de precios donde la fecha de inicio sea menor o igual a la fecha proporcionada (date), y donde el identificador del producto (productId) y el identificador de la marca (brandId) coincidan. La lista resultante se ordena por prioridad de forma descendente.
 
