@@ -20,7 +20,7 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
+
 
 @SpringBootTest
 public class PricesExceptionsTest {
@@ -39,7 +39,7 @@ public class PricesExceptionsTest {
     public void testNoPricesFoundExceptionHandling() {
         when(pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(
                 LocalDateTime.now(), 1L, 1L)).thenReturn(Collections.emptyList());
-        
+
         NoPricesFoundException e = assertThrows(NoPricesFoundException.class,
                 () -> pricesService.getPrices(LocalDateTime.now(), 1L, 1L));
 
