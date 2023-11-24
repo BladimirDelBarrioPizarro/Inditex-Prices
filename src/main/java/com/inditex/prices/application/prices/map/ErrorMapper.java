@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 public class ErrorMapper {
-    public static ErrorResponse mapError(NoPricesFoundException ex) {
+    public static ErrorResponse mapError(Exception ex) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return ErrorResponse.builder()
                 .date(Timestamp.from(Instant.now()))

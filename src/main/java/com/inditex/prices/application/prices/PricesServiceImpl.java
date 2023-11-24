@@ -2,6 +2,7 @@ package com.inditex.prices.application.prices;
 import com.inditex.prices.application.prices.dto.PricesResponse;
 import com.inditex.prices.application.prices.exceptions.ErrorMessage;
 import com.inditex.prices.application.prices.exceptions.NoPricesFoundException;
+import com.inditex.prices.application.prices.exceptions.PricesServiceException;
 import com.inditex.prices.application.prices.map.PricesMapper;
 import com.inditex.prices.domain.prices.Price;
 import com.inditex.prices.infraestructure.prices.repository.PricesRepository;
@@ -22,13 +23,20 @@ public class PricesServiceImpl implements PricesService{
 
     @Override
     public PricesResponse getPrices(LocalDateTime date, Long productId, Long brandId) {
-        List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId,brandId);
-        if (prices.isEmpty()) {
-            throw new NoPricesFoundException(ErrorMessage.NO_PRICES_FOUND.getMessage());
+        try {
+            List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId,brandId);
+            if (prices.isEmpty()) {
+                throw new NoPricesFoundException(ErrorMessage.NO_PRICES_FOUND.getMessage());
+            }
+            Price selectedPrice = applicablePrice(prices);
+            log.info(" -- The final price to apply is: {}", selectedPrice.getPrice());
+            return PricesMapper.mapPricesToPricesResponse(selectedPrice);
+        } catch (Exception ex){
+            log.error(" -- An error occurred while fetching prices: {}", ex.getMessage());
+            throw new PricesServiceException(ErrorMessage.NO_SERVICES_PRICES.getMessage());
         }
-        Price selectedPrice = applicablePrice(prices);
-        log.info(" -- The final price to apply is: {}", selectedPrice.getPrice());
-        return PricesMapper.mapPricesToPricesResponse(selectedPrice);
+
+
     }
 
 

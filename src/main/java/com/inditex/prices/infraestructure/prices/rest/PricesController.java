@@ -24,7 +24,9 @@ public class PricesController {
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(LocalDateTime.class, new CustomLocalDateTimeEditor(
                 DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
-                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
+                DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"),
+                DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm")
         ));
     }
 
