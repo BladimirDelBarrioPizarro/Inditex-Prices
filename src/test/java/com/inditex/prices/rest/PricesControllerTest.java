@@ -2,8 +2,7 @@ package com.inditex.prices.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inditex.prices.application.prices.dto.PricesResponse;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
@@ -46,6 +46,7 @@ public class PricesControllerTest {
     }
 
     @Test
+    @Order(1)
     @DisplayName("Test 1: Request at 10:00 on the 14th for product 35455, brand 1 (ZARA)")
     public void testRequestAt10AMOn14thForProduct35455Brand1() throws Exception {
         LocalDateTime localDateTime = LocalDateTime.of(2020, 6, 14, 10, 0);
@@ -53,6 +54,7 @@ public class PricesControllerTest {
     }
 
     @Test
+    @Order(2)
     @DisplayName("Test 2: Request at 16:00 on the 14th for product 35455, brand 1 (ZARA)")
     public void testRequestAt4PMOn14thForProduct35455Brand1() throws Exception {
         LocalDateTime localDateTime = LocalDateTime.of(2020, 6, 14, 16, 0);
@@ -60,6 +62,7 @@ public class PricesControllerTest {
     }
 
     @Test
+    @Order(3)
     @DisplayName("Test 3: Request at 21:00 on the 14th for product 35455, brand 1 (ZARA)")
     public void testRequestAt9PMOn14thForProduct35455Brand1() throws Exception {
         LocalDateTime localDateTime = LocalDateTime.of(2020, 6, 14, 21, 0);
@@ -67,6 +70,7 @@ public class PricesControllerTest {
     }
 
     @Test
+    @Order(4)
     @DisplayName("Test 4: Request at 10:00 on the 15th for product 35455, brand 1 (ZARA)")
     public void testRequestAt10AMOn15thForProduct35455Brand1() throws Exception {
         LocalDateTime localDateTime = LocalDateTime.of(2020, 6, 15, 10, 0);
@@ -74,6 +78,7 @@ public class PricesControllerTest {
     }
 
     @Test
+    @Order(5)
     @DisplayName("Test 5: Request at 21:00 on the 16th for product 35455, brand 1 (ZARA)")
     public void testRequestAt9PMOn16thForProduct35455Brand1() throws Exception {
         LocalDateTime localDateTime = LocalDateTime.of(2020, 6, 16, 21, 0);
