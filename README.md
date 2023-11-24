@@ -46,7 +46,7 @@ findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc: Este mét
 
 El resultado de la consulta se almacena en una lista de objetos Price.
 
-### Ejemplo de petición 
+### Ejemplos de peticiónes 
 
 ```
 http://localhost:8080/api/prices?date=2020-06-14T21:00&productId=35455&brandId=1
@@ -54,6 +54,17 @@ http://localhost:8080/api/prices?date=2020-06-14T21:00&productId=35455&brandId=1
 ```
 http://localhost:8080/api/prices?date=14/06/2020 21:00&productId=35455&brandId=1
 ```
+Para la configuración del controlador se utiliza la anotación @InitBinder para personalizar la configuración de enlace de datos de Spring.
+La función initBinder se llama durante la inicialización del controlador y se encarga de configurar el WebDataBinder, que es responsable de vincular los parámetros de la solicitud a los argumentos del controlador.
 
+Se configuro la aplicación para los siguientes patrones pudiendo añadir cualquier patrón.
+Se tomaron las / para las fechas y se omitieron los segundos al hacer las peticiones horas y minutos.
+
+```
+yyyy-MM-dd'T'HH:mm
+dd/MM/yyyy HH:mm
+yyyy/MM/dd HH:mm
+MM/dd/yyyy HH:mm
+```
 
 
