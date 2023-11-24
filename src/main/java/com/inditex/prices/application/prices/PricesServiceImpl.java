@@ -23,21 +23,15 @@ public class PricesServiceImpl implements PricesService{
 
     @Override
     public PricesResponse getPrices(LocalDateTime date, Long productId, Long brandId) {
-        try {
-            List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId,brandId);
+            List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId, brandId);
             if (prices.isEmpty()) {
                 throw new NoPricesFoundException(ErrorMessage.NO_PRICES_FOUND.getMessage());
             }
             Price selectedPrice = applicablePrice(prices);
-            log.info(" -- The final price to apply is: {}", selectedPrice.getPrice());
+            log.info("-The final price to apply is: {}", selectedPrice.getPrice());
             return PricesMapper.mapPricesToPricesResponse(selectedPrice);
-        } catch (Exception ex){
-            log.error(" -- An error occurred while fetching prices: {}", ex.getMessage());
-            throw new PricesServiceException(ErrorMessage.NO_SERVICES_PRICES.getMessage());
-        }
-
-
     }
+
 
 
 

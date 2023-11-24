@@ -2,7 +2,9 @@ package com.inditex.prices.exceptions;
 
 import com.inditex.prices.application.prices.PricesService;
 import com.inditex.prices.application.prices.PricesServiceImpl;
+import com.inditex.prices.application.prices.exceptions.ErrorMessage;
 import com.inditex.prices.application.prices.exceptions.NoPricesFoundException;
+import com.inditex.prices.application.prices.exceptions.PricesServiceException;
 import com.inditex.prices.application.prices.exceptions.dto.ErrorResponse;
 import com.inditex.prices.infraestructure.prices.repository.PricesRepository;
 import com.inditex.prices.infraestructure.prices.rest.PriceExceptionHandler;

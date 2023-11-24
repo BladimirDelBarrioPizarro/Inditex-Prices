@@ -73,4 +73,12 @@ public class PricesControllerTest {
         performPriceRequest(localDateTime, 35455L, 1L);
     }
 
+    @Test
+    @DisplayName("Test 5: Request at 21:00 on the 16th for product 35455, brand 1 (ZARA)")
+    public void testRequestAt9PMOn16thForProduct35455Brand1() throws Exception {
+        LocalDateTime localDateTime = LocalDateTime.of(2020, 6, 16, 21, 0);
+        performPriceRequest(localDateTime, 35455L, 1L);
+    }
+
+
 }
