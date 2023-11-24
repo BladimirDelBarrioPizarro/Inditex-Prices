@@ -34,10 +34,26 @@ mvn test
 
 La clase `PricesServiceImpl` es el corazón de la aplicación. Aquí, se implementa el método `getPrices`, que recupera los precios según ciertos criterios.
 
+En la aplicación, la obtención de precios se realiza mediante una consulta a la base de datos utilizando Spring Data JPA. La siguiente línea de código representa la consulta:
+```
+List<Price> prices = pricesRepository.findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc(date, productId, brandId);
+```
+
 La lógica de selección del precio aplicable se encuentra en el método applicablePrice, donde se ordenan las tarifas por fecha de inicio y prioridad de manera descendente. En este proceso, la lista de tarifas se organiza primero por fecha de inicio de forma descendente y luego por prioridad de forma descendente. La primera tarifa en la lista ordenada tiene la mayor prioridad.
+pricesRepository: Hace referencia al repositorio de Spring Data JPA asociado a la entidad Price. Este repositorio extiende la interfaz JpaRepository y es utilizado para interactuar con la base de datos.
 
+findByStartDateLessThanEqualAndProductIdAndBrandIdOrderByPriorityDesc: Este método de consulta se basa en convenciones de nomenclatura de Spring Data JPA. La consulta busca registros en la tabla de precios donde la fecha de inicio sea menor o igual a la fecha proporcionada (date), y donde el identificador del producto (productId) y el identificador de la marca (brandId) coincidan. La lista resultante se ordena por prioridad de forma descendente.
 
+El resultado de la consulta se almacena en una lista de objetos Price.
 
+### Ejemplo de petición 
+
+```
+http://localhost:8080/api/prices?date=2020-06-14T21:00&productId=35455&brandId=1
+```
+```
+http://localhost:8080/api/prices?date=14/06/2020 21:00&productId=35455&brandId=1
+```
 
 
 

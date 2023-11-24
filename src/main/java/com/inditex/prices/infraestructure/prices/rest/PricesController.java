@@ -2,14 +2,15 @@ package com.inditex.prices.infraestructure.prices.rest;
 
 import com.inditex.prices.application.prices.PricesService;
 import com.inditex.prices.application.prices.dto.PricesResponse;
+import com.inditex.prices.infraestructure.prices.rest.datetime.CustomLocalDateTimeEditor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @RestController
@@ -18,6 +19,14 @@ public class PricesController {
 
     @Autowired
     private PricesService pricesService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(LocalDateTime.class, new CustomLocalDateTimeEditor(
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+        ));
+    }
 
     @GetMapping("/prices")
     public PricesResponse getPrices(
