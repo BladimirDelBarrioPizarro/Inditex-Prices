@@ -90,7 +90,7 @@ Disponemos de la descripción OpenApi aqui
 http://localhost:8080/v3/api-docs
 ```
 ```
-http://localhost:8080/swagger-ui/index.htm
+http://localhost:8080/swagger-ui/index.html
 ```
 En Swagger/OpenAPI, las fechas generalmente se representan en formato ISO 8601. Asegúrate de que estás proporcionando la fecha en el formato correcto cuando pruebas tu API a través de Swagger.
 
